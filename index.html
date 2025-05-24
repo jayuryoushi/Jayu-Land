@@ -1,33 +1,110 @@
-<form id="leadForm">
-  <input type="text" name="name" placeholder="Your Name" required />
-  <input type="email" name="email" placeholder="Your Email" required />
-  <textarea name="message" placeholder="Your Message" required></textarea>
-  <button type="submit">Send</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jayu Ryoushi — Landing Page Service</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+  <header class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-indigo-600">Jayu Ryoushi</h1>
+      <a href="#pricing" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">Get Started</a>
+    </div>
+  </header>
 
-<script>
-  document.getElementById('leadForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const data = {
-      name: form.name.value,
-      email: form.email.value,
-      message: form.message.value
-    };
-    try {
-      const res = await fetch('https://jayu-backend.onrender.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      if (res.ok) {
-        alert('Thanks for contacting us!');
-        form.reset();
-      } else {
-        alert('Something went wrong. Please try again.');
+  <section class="text-center py-20 bg-gradient-to-b from-white to-indigo-50">
+    <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Custom Landing Pages That Convert</h2>
+    <p class="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">We design and build tailored landing pages for businesses that want to generate more leads, clients, and revenue.</p>
+    <a href="#pricing" class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg text-lg hover:bg-indigo-700">See Pricing</a>
+  </section>
+
+  <section id="pricing" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <h3 class="text-3xl font-bold text-center text-gray-800 mb-12">Simple Pricing</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="border rounded-2xl p-6 shadow-md">
+          <h4 class="text-xl font-semibold text-indigo-600">Starter</h4>
+          <p class="text-4xl font-bold my-4">$49</p>
+          <ul class="text-gray-600 space-y-2 mb-6">
+            <li>✔ 1 Landing Page</li>
+            <li>✔ Mobile-Responsive Design</li>
+            <li>✔ Basic Contact Form</li>
+          </ul>
+          <a href="#contact" class="block text-center bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700">Get Started</a>
+        </div>
+        <div class="border-2 border-indigo-600 rounded-2xl p-6 shadow-lg">
+          <h4 class="text-xl font-semibold text-indigo-600">Professional</h4>
+          <p class="text-4xl font-bold my-4">$129</p>
+          <ul class="text-gray-600 space-y-2 mb-6">
+            <li>✔ Everything in Starter</li>
+            <li>✔ Custom Design & Copywriting</li>
+            <li>✔ Lead Storage + Email Alerts</li>
+          </ul>
+          <a href="#contact" class="block text-center bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700">Get Started</a>
+        </div>
+        <div class="border rounded-2xl p-6 shadow-md">
+          <h4 class="text-xl font-semibold text-indigo-600">Business+</h4>
+          <p class="text-4xl font-bold my-4">$249</p>
+          <ul class="text-gray-600 space-y-2 mb-6">
+            <li>✔ Everything in Professional</li>
+            <li>✔ Advanced Analytics</li>
+            <li>✔ Multi-Step Forms + Integrations</li>
+          </ul>
+          <a href="#contact" class="block text-center bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-20 bg-gray-50">
+    <div class="max-w-xl mx-auto px-6 text-center">
+      <h3 class="text-3xl font-bold text-gray-800 mb-6">Let's Build Your Page</h3>
+      <form id="leadForm" class="space-y-4">
+        <input type="text" name="name" placeholder="Your Name" required class="w-full border border-gray-300 p-3 rounded-lg" />
+        <input type="email" name="email" placeholder="Your Email" required class="w-full border border-gray-300 p-3 rounded-lg" />
+        <textarea name="message" placeholder="Your Message" required class="w-full border border-gray-300 p-3 rounded-lg"></textarea>
+        <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700">Send</button>
+      </form>
+      <p id="formResponse" class="mt-4 text-sm"></p>
+    </div>
+  </section>
+
+  <footer class="text-center py-6 text-gray-500 text-sm bg-white border-t">
+    &copy; 2025 Jayu Ryoushi. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById("leadForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value,
+      };
+      try {
+        const res = await fetch("https://jayu-backend.onrender.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const responseEl = document.getElementById("formResponse");
+        if (res.ok) {
+          form.reset();
+          responseEl.textContent = "Thanks! We'll be in touch soon.";
+          responseEl.classList.remove("text-red-500");
+          responseEl.classList.add("text-green-600");
+        } else {
+          responseEl.textContent = "Oops! Something went wrong.";
+          responseEl.classList.remove("text-green-600");
+          responseEl.classList.add("text-red-500");
+        }
+      } catch (err) {
+        document.getElementById("formResponse").textContent = "Submission failed. Please try again.";
       }
-    } catch (err) {
-      alert('Error submitting form.');
-    }
-  });
-</script>
+    });
+  </script>
+</body>
+</html>
